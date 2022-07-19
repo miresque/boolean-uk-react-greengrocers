@@ -183,3 +183,23 @@ button {
     border-bottom: 2px solid #00675b;
   }
 }
+
+/* Filter & Sort */
+#filter-by-type-form label {
+  display: grid;
+  grid-template-columns: repeat(2, 125px);
+  justify-content: center;
+}
+
+.filter-sort li {
+  display: grid;
+  justify-content: end;
+}
+
+.filter-sort {
+  display: grid;
+  grid-template-columns: repeat(2, 250px);
+  grid-gap: 1rem;
+  justify-content: center;
+  list-style: none;
+}
