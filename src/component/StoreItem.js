@@ -4,7 +4,7 @@ export default function StoreItem(props) {
     const imgSrc = `/assets/icons/${item.id}.svg`
 
     return (
-        <li key={item.id} id={item.id}>
+        <li id={item.id}>
             <div className="store--item-icon">
                 <img src={imgSrc} alt={item.name} />
             </div>
