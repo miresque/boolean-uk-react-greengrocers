@@ -12,7 +12,12 @@ export default function Store() {
   const [storeItemsOnDisplay, setStoreItemsOnDisplay] = useState(storeItems)
   const [cartItems, setCartItems] = useState([])
   const [selectedType, setSelectedType] = useState('none')
-  const [sortedStatus, setSortedStatus] = useState(false)
+
+  const ascendingOrder = -1
+  const noOrder = 0
+  const descendingOrder = 1
+  const [sortedStatus, setSortedStatus] = useState(noOrder)
+
 
   const addToCart = (item) => {
     let newCart = [...cartItems]
@@ -47,18 +52,16 @@ export default function Store() {
 
   const sortByPrice = () => {
     let sortedStoreItems = [...storeItemsOnDisplay]
-    if (sortedStatus) {
-        setSortedStatus(!sortedStatus)
+    if (sortedStatus === descendingOrder || sortedStatus === 0) {
+        setSortedStatus(ascendingOrder)
         sortedStoreItems.sort((a, b) => {
             return a.price - b.price
         })
-        console.log(sortedStoreItems)
-    } else if(!sortedStatus) {
-        setSortedStatus(!sortedStatus)
+    } else if(sortedStatus === ascendingOrder) {
+        setSortedStatus(descendingOrder)
         sortedStoreItems.sort((a, b) => {
             return b.price - a.price
         })
-        console.log(sortedStoreItems)
     }
     setStoreItemsOnDisplay(sortedStoreItems)
   }
@@ -87,7 +90,8 @@ export default function Store() {
                 </form>
             </li>
             <li>
-                <button onClick={sortByPrice}>Sort By Price</button>
+                <button onClick={sortByPrice}>{sortedStatus === ascendingOrder?'Ascending ↑':
+                                               sortedStatus === descendingOrder?'Descending ↓':'Sort By Price'}</button>
             </li>
         </ul>
         <ul className="item-list store--item-list">
