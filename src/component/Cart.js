@@ -1,15 +1,15 @@
 import CartItem from "./CartItem"
 
 export default function Cart(props) {
-    const { addToCart, cartItems, setCartItems } = props
+    const { addToCart, cartItems, setCartItems, getIndex, hasItem } = props
 
     const decrementItem = (item) => {
         let newCart = [...cartItems]
-        const index = newCart.findIndex((basketItem => basketItem.id === item.id))
+        const index = getIndex(newCart, item)
     
-        if (cartItems.some(e => e.id === item.id) && newCart[index].quantity > 1) {
+        if (hasItem(cartItems, item) && newCart[index].quantity > 1) {
           newCart[index].quantity--
-        } else if(cartItems.some(e => e.id === item.id) && newCart[index].quantity <=1 ) {
+        } else if(hasItem(cartItems, item) && newCart[index].quantity <=1 ) {
           newCart.splice(index, 1)
         }
         setCartItems(newCart)
@@ -17,10 +17,8 @@ export default function Cart(props) {
 
     const updateTotalPrice = () => {
         let totalPrice = 0
-      
         for (let i = 0; i < cartItems.length; i++) {
           const item = cartItems[i];
-      
           totalPrice += (item.quantity * item.price)
         }
         return `£${totalPrice.toFixed(2)}`
@@ -32,7 +30,11 @@ export default function Cart(props) {
             <div className="cart--item-list-container">
                 <ul className="item-list cart--item-list">
                     {cartItems.map(item => (
-                        <CartItem key={item.id} item={item} decrement={decrementItem} increment={addToCart} />
+                        <CartItem key={item.id}
+                         item={item} 
+                         decrement={decrementItem} 
+                         increment={addToCart} 
+                        />
                     ))} 
                 </ul>
             </div>
