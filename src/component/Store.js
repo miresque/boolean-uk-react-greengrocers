@@ -6,8 +6,6 @@ import { useState } from 'react'
 import Cart from './Cart'
 import FilterBar from './FilterBar'
 
-console.log(initialStoreItems)
-
 export default function Store() {
   const [storeItems, setStoreItems] = useState(initialStoreItems)
   const [storeItemsOnDisplay, setStoreItemsOnDisplay] = useState(storeItems)

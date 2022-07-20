@@ -203,3 +203,10 @@ button {
   justify-content: center;
   list-style: none;
 }
+
+/* Item Details */
+.details {
+  text-align: center;
+  text-justify: center;
+  font-size: 1.2rem;
+}
